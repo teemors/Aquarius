@@ -1,15 +1,12 @@
 # Nepxion Aquarius
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/Nepxion/Aquarius/blob/master/LICENSE)
-[![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/aquarius.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20aquarius)
-[![Javadocs](http://www.javadoc.io/badge/com.nepxion/aquarius-lock-aop.svg)](http://www.javadoc.io/doc/com.nepxion/aquarius-lock-aop)
-[![Build Status](https://travis-ci.org/Nepxion/Aquarius.svg?branch=master)](https://travis-ci.org/Nepxion/Aquarius)
+[![Total lines](https://tokei.rs/b1/github/Nepxion/Aquarius?category=lines)](https://tokei.rs/b1/github/Nepxion/Aquarius?category=lines)  [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license)](https://github.com/Nepxion/Aquarius/blob/master/LICENSE)  [![Maven Central](https://img.shields.io/maven-central/v/com.nepxion/aquarius.svg?label=maven%20central)](http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.nepxion%22%20AND%20aquarius)  [![Javadocs](http://www.javadoc.io/badge/com.nepxion/aquarius-lock-aop.svg)](http://www.javadoc.io/doc/com.nepxion/aquarius-lock-aop)  [![Build Status](https://travis-ci.org/Nepxion/Aquarius.svg?branch=master)](https://travis-ci.org/Nepxion/Aquarius)  [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ccd6168af5b84d8db525c031d52abfb5)](https://www.codacy.com/project/HaojunRen/Aquarius/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Nepxion/Aquarius&amp;utm_campaign=Badge_Grade_Dashboard)
 
-Nepxion Aquarius是一款基于Redis + Zookeeper的分布式应用组件集合，包含分布式锁，缓存，ID生成器，限速限流器。它采用Nepxion Matrix AOP框架进行切面架构，提供注解调用方式，同时也提供API调用方式
+Nepxion Aquarius是一款基于Redis + Zookeeper的分布式应用组件集合，包含分布式锁，缓存，ID生成器，限速限流器。它采用Nepxion Matrix AOP框架进行切面架构，提供注解调用方式，也提供API调用方式
 
 ## 请联系我
-- 请加微信群或者微信
+微信和公众号
 
-![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信群-1.jpg) ![Alt text](https://github.com/Nepxion/Docs/blob/master/zxing-doc/微信-1.jpg)
+![Alt text](https://github.com/HaojunRen/Docs/raw/master/zxing-doc/微信-1.jpg)![Alt text](https://github.com/HaojunRen/Docs/raw/master/zxing-doc/公众号-1.jpg)
 
 ## 简介
 - 分布式应用组件集合
@@ -25,48 +22,42 @@ Nepxion Aquarius是一款基于Redis + Zookeeper的分布式应用组件集合�
   打开[http://localhost:2222/swagger-ui.html](http://localhost:2222/swagger-ui.html)访问
 - 支持组件扩展适配，再次编程
   - RedissonAdapter，扩展实现可默认覆盖原生组件
-  - RedisAdapter，扩展实现可默认覆盖原生组件
-  - CuratorAdapter，扩展实现可默认覆盖原生组件
 
-![Alt text](https://github.com/Nepxion/Docs/blob/master/aquarius-doc/Swagger.jpg)
+![Alt text](https://github.com/HaojunRen/Docs/raw/master/aquarius-doc/Swagger.jpg)
 
 ## 兼容
-最新版本兼容
-- Spring 4.x.x和Spring Boot 1.x.x
-- Spring 5.x.x和Spring Boot 2.x.x，但需要手工去除第三方包引入的低版本Spring依赖包
+- 1.x.x版本是基于Spring开发的，相对使用较繁琐，不建议使用
+- 2.x.x版本是基于Spring Boot开发的，相对简单，功能也更加强大
+- 默认支持Spring 5.x.x和Spring Boot 3.x.x，也兼容Spring 4.x.x和Spring Boot 1.x.x
 
-### 依赖
+## 依赖
 ```xml
-<dependency>
-    <groupId>com.nepxion</groupId>
-    <artifactId>aquarius</artifactId>
-    <version>${aquarius.version}</version>
-    <type>pom</type>
-    <scope>import</scope>
-</dependency>
-
 分布式锁
 <dependency>
     <groupId>com.nepxion</groupId>
     <artifactId>aquarius-lock-starter</artifactId>
+    <version>${aquarius.version}</version>
 </dependency>
 
 分布式缓存
 <dependency>
     <groupId>com.nepxion</groupId>
     <artifactId>aquarius-cache-starter</artifactId>
+    <version>${aquarius.version}</version>
 </dependency>
 
 分布式全局唯一ID
 <dependency>
     <groupId>com.nepxion</groupId>
     <artifactId>aquarius-id-generator-starter</artifactId>
+    <version>${aquarius.version}</version>
 </dependency>
 
 分布式限速限流
 <dependency>
     <groupId>com.nepxion</groupId>
     <artifactId>aquarius-limit-starter</artifactId>
+    <version>${aquarius.version}</version>
 </dependency>
 ```
 
@@ -612,7 +603,7 @@ public class ReadWriteLockApplication {
 ```
 
 ## Nepxion Aquarius Cache
-基于原生的RedisTemplate来实现(本采用Redisson的缓存模块，只在付费的Redisson PRO下才支持，故作罢)，构建于Nepxion Matrix AOP framework
+基于Spring Redis来实现，也可以修改源码换成Redisson来实现（在aquarius-cache-starter下的CacheConfiguration中RedisCacheConfiguration换成RedissonCacheConfiguration即可）构建于Nepxion Matrix AOP framework
 
 ### 介绍
 - 缓存注解既可以加在接口上，也可以加在实现类上，也可以加在没有接口只有类的情形下
@@ -1417,3 +1408,7 @@ http://localhost:2222/nextSequenceId?name=idgenerater&key=X-Y
 # 直接调用方式(雪花算法)
 http://localhost:2222/nextLocalUniqueId?dataCenterId=2&machineId=3
 ```
+
+## Star走势图
+
+[![Stargazers over time](https://starchart.cc/Nepxion/Aquarius.svg)](https://starchart.cc/Nepxion/Aquarius)
